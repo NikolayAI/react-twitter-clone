@@ -10,7 +10,7 @@ import {useStylesSignIn} from '../../pages/SignIn'
 // interface IModalProps {
 //     title: string
 //     classes?: ReturnType<typeof useStylesSignIn>
-//     open?: boolean
+//     visible?: boolean
 //     onClose: () => void
 //     children: React.ReactNode
 // }
@@ -25,8 +25,12 @@ type ModalPropsType = {
 }
 
 
-export const ModalBlock: React.FC<ModalPropsType> = ({title, visible = false, onClose, children}): React.ReactElement | null => {
+export const ModalBlock: React.FC<ModalPropsType> = (
+    {title, visible = false, onClose, children}
+    ): React.ReactElement | null => {
+
     if (!visible) return null
+
     return (
         <Dialog open={visible} onClose={onClose} aria-labelledby={'form-dialog'}>
             <DialogTitle id={'form-dialog-title'}>

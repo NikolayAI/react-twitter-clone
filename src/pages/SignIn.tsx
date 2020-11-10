@@ -14,10 +14,11 @@ import FormControl from '@material-ui/core/FormControl'
 
 export const SignIn = () => {
     const classes = useStylesSignIn()
-    const [visibleSignIn, setVisibleSignIn] = useState(false)
+    const [visibleModal, setVisibleModal] = useState<'signIn' | 'signUp'>()
 
-    const handleClickOpen = () => setVisibleSignIn(true)
-    const handleClose = () => setVisibleSignIn(false)
+    const handleClickOpenSignIn = () => setVisibleModal('signIn')
+    const handleClickOpenSignUp = () => setVisibleModal('signUp')
+    const handleCloseModal = () => setVisibleModal(undefined)
 
 
     return (
@@ -55,14 +56,25 @@ export const SignIn = () => {
                         <b>Присоединяйся к Твиттеру прямо сейчас!</b>
                     </Typography>
                     <br/>
-                    <Button className={classes.loginSideRegButton} variant={'contained'} color={'primary'} fullWidth>
+                    <Button onClick={handleClickOpenSignUp}
+                            className={classes.loginSideRegButton}
+                            variant={'contained'} color={'primary'}
+                            fullWidth
+                    >
                         Зарегистрироваться
                     </Button>
-                    <Button onClick={handleClickOpen} variant={'outlined'} color={'primary'} fullWidth>
+                    <Button onClick={handleClickOpenSignIn}
+                            variant={'outlined'}
+                            color={'primary'}
+                            fullWidth
+                    >
                         Войти
                     </Button>
-                    <ModalBlock onClose={handleClose} visible={visibleSignIn} title={'Войти в аккаунт'} classes={classes}>
-                        <FormControl component={'fieldset'} fullWidth>
+                    <ModalBlock onClose={handleCloseModal}
+                                visible={visibleModal === 'signIn'}
+                                title={'Войти в аккаунт'}
+                                classes={classes}>
+                        <FormControl className={classes.loginFormControl} component={'fieldset'} fullWidth>
                             <FormGroup aria-label={'position'} row>
                                 <TextField
                                     className={classes.loginSideField}
@@ -84,12 +96,59 @@ export const SignIn = () => {
                                     type={'password'}
                                     fullWidth
                                 />
-                                <Button onClick={handleClose} variant={'contained'} color={'primary'} fullWidth>
+                                <Button onClick={handleCloseModal}
+                                        variant={'contained'}
+                                        color={'primary'}
+                                        fullWidth
+                                >
                                     Войти
                                 </Button>
-                                <br/>
-                                <br/>
-                                <br/>
+                            </FormGroup>
+                        </FormControl>
+                    </ModalBlock>
+                    <ModalBlock onClose={handleCloseModal}
+                                visible={visibleModal === 'signUp'}
+                                title={'Создайте учетную запись'}
+                                classes={classes}>
+                        <FormControl className={classes.loginFormControl} component={'fieldset'} fullWidth>
+                            <FormGroup aria-label={'position'} row>
+                                <TextField
+                                    className={classes.registerField}
+                                    autoFocus
+                                    id={'name'}
+                                    label={'Имя'}
+                                    InputLabelProps={{shrink: true}}
+                                    variant={'filled'}
+                                    type={'name'}
+                                    fullWidth
+                                />
+                                <TextField
+                                    className={classes.registerField}
+                                    autoFocus
+                                    id={'email'}
+                                    label={'E-mail'}
+                                    InputLabelProps={{shrink: true}}
+                                    variant={'filled'}
+                                    type={'email'}
+                                    fullWidth
+                                />
+                                <TextField
+                                    className={classes.registerField}
+                                    autoFocus
+                                    id={'password'}
+                                    label={'Пароль'}
+                                    InputLabelProps={{shrink: true}}
+                                    variant={'filled'}
+                                    type={'password'}
+                                    fullWidth
+                                />
+                                <Button onClick={handleCloseModal}
+                                        variant={'contained'}
+                                        color={'primary'}
+                                        fullWidth
+                                >
+                                    Далее
+                                </Button>
                             </FormGroup>
                         </FormControl>
                     </ModalBlock>
@@ -170,5 +229,11 @@ export const useStylesSignIn = makeStyles((theme) => ({
     },
     loginSideField: {
         marginBottom: 18,
-    }
+    },
+    registerField: {
+        marginBottom: theme.spacing(5),
+    },
+    loginFormControl: {
+        marginBottom: theme.spacing(2),
+    },
 }))
