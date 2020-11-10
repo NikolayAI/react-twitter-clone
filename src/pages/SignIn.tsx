@@ -12,7 +12,7 @@ import TextField from '@material-ui/core/TextField'
 import FormControl from '@material-ui/core/FormControl'
 
 
-export const SignIn = () => {
+export const SignIn: React.FC = () => {
     const classes = useStylesSignIn()
     const [visibleModal, setVisibleModal] = useState<'signIn' | 'signUp'>()
 
@@ -64,6 +64,7 @@ export const SignIn = () => {
                         Зарегистрироваться
                     </Button>
                     <Button onClick={handleClickOpenSignIn}
+                            className={classes.loginSideRegButton}
                             variant={'outlined'}
                             color={'primary'}
                             fullWidth
@@ -226,6 +227,7 @@ export const useStylesSignIn = makeStyles((theme) => ({
     },
     loginSideRegButton: {
         marginBottom: 20,
+        fontSize: 12,
     },
     loginSideField: {
         marginBottom: 18,

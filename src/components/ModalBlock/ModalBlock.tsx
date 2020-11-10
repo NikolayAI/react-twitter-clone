@@ -27,7 +27,7 @@ type ModalPropsType = {
 
 export const ModalBlock: React.FC<ModalPropsType> = (
     {title, visible = false, onClose, children}
-    ): React.ReactElement | null => {
+    ) => {
 
     if (!visible) return null
 
