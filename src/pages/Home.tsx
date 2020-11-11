@@ -1,26 +1,14 @@
 import React from 'react'
-import {createStyles, Grid} from '@material-ui/core'
+import {createStyles, Grid, Theme} from '@material-ui/core'
 import Paper from '@material-ui/core/Paper'
-import TwitterIcon from '@material-ui/icons/Twitter'
-import IconButton from '@material-ui/core/IconButton/IconButton'
-import SearchIcon from '@material-ui/icons/Search'
-import NotificationsNoneIcon from '@material-ui/icons/NotificationsNone'
-import MailOutlineIcon from '@material-ui/icons/MailOutline'
-import BookmarkBorderIcon from '@material-ui/icons/BookmarkBorder'
-import ListAltIcon from '@material-ui/icons/ListAlt'
-import PermIdentityIcon from '@material-ui/icons/PermIdentity'
 import Typography from '@material-ui/core/Typography'
 import makeStyles from '@material-ui/core/styles/makeStyles'
 import Container from '@material-ui/core/Container'
 import withStyles from '@material-ui/core/styles/withStyles'
 import InputBase from '@material-ui/core/InputBase'
-import Avatar from '@material-ui/core/Avatar'
 import grey from '@material-ui/core/colors/grey'
-import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline'
-import RepeatIcon from '@material-ui/icons/Repeat'
-import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder'
-import ReplyOutlinedIcon from '@material-ui/icons/ReplyOutlined'
-import classNames from 'classnames'
+import {Tweet} from '../components/Tweet/Tweet'
+import {SideMenu} from '../components/SideMenu/SideMenu'
 
 
 export const Home = () => {
@@ -30,104 +18,29 @@ export const Home = () => {
         <Container className={classes.wrapper} maxWidth={'lg'}>
             <Grid container spacing={3}>
                 <Grid item xs={3}>
-                    <ul className={classes.sideMenuList}>
-                        <li className={classes.sideMenuListItem}>
-                            <IconButton className={classes.logo} aria-label="delete" color={'primary'}>
-                                <TwitterIcon className={classes.logoIcon}/>
-                            </IconButton>
-                        </li>
-                        <li className={classes.sideMenuListItem}>
-                            <IconButton aria-label="delete">
-                                <SearchIcon className={classes.sideMenuListItemIcon}/>
-                            </IconButton>
-                            <Typography className={classes.sideMenuListItemLabel} variant={'h6'}>Поиск</Typography>
-                        </li>
-                        <li className={classes.sideMenuListItem}>
-                            <IconButton aria-label="delete">
-                                <NotificationsNoneIcon className={classes.sideMenuListItemIcon}/>
-                            </IconButton>
-                            <Typography className={classes.sideMenuListItemLabel}
-                                        variant={'h6'}>Уведомления</Typography>
-                        </li>
-                        <li className={classes.sideMenuListItem}>
-                            <IconButton aria-label="delete">
-                                <MailOutlineIcon className={classes.sideMenuListItemIcon}/>
-                            </IconButton>
-                            <Typography className={classes.sideMenuListItemLabel} variant={'h6'}>Сообщения</Typography>
-                        </li>
-                        <li className={classes.sideMenuListItem}>
-                            <IconButton aria-label="delete">
-                                <BookmarkBorderIcon className={classes.sideMenuListItemIcon}/>
-                            </IconButton>
-                            <Typography className={classes.sideMenuListItemLabel} variant={'h6'}>Закладки</Typography>
-                        </li>
-                        <li className={classes.sideMenuListItem}>
-                            <IconButton aria-label="delete">
-                                <ListAltIcon className={classes.sideMenuListItemIcon}/>
-                            </IconButton>
-                            <Typography className={classes.sideMenuListItemLabel} variant={'h6'}>Список</Typography>
-                        </li>
-                        <li className={classes.sideMenuListItem}>
-                            <IconButton aria-label="delete">
-                                <PermIdentityIcon className={classes.sideMenuListItemIcon}/>
-                            </IconButton>
-                            <Typography className={classes.sideMenuListItemLabel} variant={'h6'}>Профиль</Typography>
-                        </li>
-                    </ul>
+                    <SideMenu classes={classes}/>
                 </Grid>
                 <Grid item xs={6}>
                     <Paper className={classes.tweetsWrapper} variant={'outlined'}>
                         <Paper className={classes.tweetsHeader} variant={'outlined'}>
                             <Typography variant={'h6'}>Главная</Typography>
                         </Paper>
-                        <Paper className={classNames(classes.tweet, classes.tweetsHeader)} variant={'outlined'}>
-                            <Grid container spacing={3}>
-                                <Grid item xs={1}>
-                                    <Avatar alt='User avatar'
-                                            src='https://images.unsplash.com/photo-1605026289292-78351cbc98a6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=633&q=80'/>
-                                </Grid>
-                                <Grid item xs={11}>
-                                    <Typography>
-                                        <b>thisPerson</b>
-                                        <span className={classes.tweetUserName}>@SomePerson</span>
-                                    </Typography>
-                                    <Typography variant={'body1'} gutterBottom>
-                                        orem ipsum – псевдо-латинский текст, который используется для веб дизайна,
-                                        типографии, оборудования, и распечатки вместо английского текста для того, чтобы
-                                        сделать ударение не на содержание, а на элементы дизайна. Такой текст также
-                                        называется как заполнитель.
-                                    </Typography>
-                                    <div className={classes.tweetFooter}>
-                                        <div>
-                                            <IconButton>
-                                                <ChatBubbleOutlineIcon/>
-                                            </IconButton>
-                                            <span>1</span>
-                                        </div>
-                                        <div>
-                                            <IconButton>
-                                                <RepeatIcon/>
-                                            </IconButton>
-                                            <span>2</span>
-                                        </div>
-                                        <div>
-                                            <IconButton>
-                                                <FavoriteBorderIcon/>
-                                            </IconButton>
-                                            <span>3</span>
-                                        </div>
-                                        <div>
-                                            <IconButton>
-                                                <ReplyOutlinedIcon/>
-                                            </IconButton>
-                                            <span>4</span>
-                                        </div>
-                                    </div>
-                                </Grid>
-                            </Grid>
-                        </Paper>
+                        {[...new Array(20).fill(
+                            <Tweet
+                                text={`Многие думают, что Lorem Ipsum - взятый с потолка псевдо-латинский набор слов, 
+                            но это не совсем так. Его корни уходят в один фрагмент классической латыни 45 года н.э., 
+                            то есть более двух тысячелетий назад.`
+                                }
+                                classes={classes}
+                                user={{
+                                    fullName: 'Zina Ivano',
+                                    userName: 'ZinaIvano',
+                                    avatarUrl: `https://images.unsplash.com/photo-1605020614138-eef9ad0c5164?ixlib=
+                                rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=700&q=80`
+                                }}
+                            />
+                        )]}
                     </Paper>
-
                 </Grid>
                 <Grid item xs={3}>
                     <SearchTextField fullWidth placeholder={'Поиск по Твиттеру'}/>
@@ -138,7 +51,7 @@ export const Home = () => {
 }
 
 
-const useHomeStyles = makeStyles(() => ({
+export const useHomeStyles = makeStyles((theme: Theme) => ({
     wrapper: {
         height: '100vh',
     },
@@ -152,10 +65,30 @@ const useHomeStyles = makeStyles(() => ({
         listStyle: 'none',
         padding: 0,
         margin: 0,
+        width: 230,
     },
     sideMenuListItem: {
-        display: 'flex',
-        alignItems: 'center',
+        cursor: 'pointer',
+        '&:hover': {
+            '& div': {
+                backgroundColor: 'rgb(29, 161, 242, 0.1)',
+                '& h6': {
+                    color: theme.palette.primary.main,
+                },
+                '& svg path': {
+                    fill: theme.palette.primary.main,
+                },
+            },
+        },
+        '& div': {
+            display: 'inline-flex',
+            alignItems: 'center',
+            padding: '0 10px',
+            borderRadius: 30,
+            height: 50,
+            marginBottom: 15,
+            transition: 'background-color 0.1s ease-in-out'
+        },
     },
     sideMenuListItemLabel: {
         fontWeight: 700,
@@ -164,6 +97,10 @@ const useHomeStyles = makeStyles(() => ({
     },
     sideMenuListItemIcon: {
         fontSize: 28,
+    },
+    sideMenuTweetButton: {
+        padding: theme.spacing(3),
+        marginTop: theme.spacing(2),
     },
     tweetsWrapper: {
         borderRadius: 0,
@@ -183,13 +120,20 @@ const useHomeStyles = makeStyles(() => ({
     },
     tweet: {
         cursor: 'pointer',
+        paddingTop: 15,
         '&:hover': {
             backgroundColor: 'rgb(245, 248, 250)',
         },
     },
+    tweetAvatar: {
+        width: theme.spacing(5.5),
+        height: theme.spacing(5.5),
+    },
     tweetFooter: {
         display: 'flex',
         justifyContent: 'space-between',
+        position: 'relative',
+        left: -13,
         width: 450,
     },
     tweetFooterIcon: {
