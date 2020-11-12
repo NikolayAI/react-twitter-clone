@@ -74,7 +74,7 @@ export const SignIn: React.FC = () => {
                     <ModalBlock onClose={handleCloseModal}
                                 visible={visibleModal === 'signIn'}
                                 title={'Войти в аккаунт'}
-                                classes={classes}>
+                    >
                         <FormControl className={classes.loginFormControl} component={'fieldset'} fullWidth>
                             <FormGroup aria-label={'position'} row>
                                 <TextField
@@ -110,7 +110,7 @@ export const SignIn: React.FC = () => {
                     <ModalBlock onClose={handleCloseModal}
                                 visible={visibleModal === 'signUp'}
                                 title={'Создайте учетную запись'}
-                                classes={classes}>
+                    >
                         <FormControl className={classes.loginFormControl} component={'fieldset'} fullWidth>
                             <FormGroup aria-label={'position'} row>
                                 <TextField

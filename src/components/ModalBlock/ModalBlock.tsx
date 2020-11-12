@@ -4,12 +4,10 @@ import IconButton from '@material-ui/core/IconButton'
 import CloseIcon from '@material-ui/icons/Close'
 import DialogContent from '@material-ui/core/DialogContent'
 import Dialog from '@material-ui/core/Dialog'
-import {useStylesSignIn} from '../../pages/SignIn'
 
 
 // interface IModalProps {
 //     title: string
-//     classes?: ReturnType<typeof useStylesSignIn>
 //     visible?: boolean
 //     onClose: () => void
 //     children: React.ReactNode
@@ -17,8 +15,7 @@ import {useStylesSignIn} from '../../pages/SignIn'
 
 
 type ModalPropsType = {
-    title: string
-    classes?: ReturnType<typeof useStylesSignIn>
+    title?: string
     visible?: boolean
     onClose: () => void
     children: React.ReactNode
