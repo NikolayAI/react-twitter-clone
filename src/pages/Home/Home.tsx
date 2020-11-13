@@ -18,10 +18,21 @@ import PersonAddIcon from '@material-ui/icons/PersonAddOutlined'
 import {AddTweetForm} from '../../components/AddTweetForm/AddTweetForm'
 import {useHomeStyles} from './homeTheme'
 import {SearchTextField} from '../../components/SearchTextField/SearchTextField'
+import {useDispatch, useSelector} from 'react-redux'
+import {fetchTweets} from '../../store/ducks/tweets/actionCreators'
+import {selectTweetsIsLoading, selectTweetsItems} from '../../store/ducks/tweets/selectors'
+import CircularProgress from '@material-ui/core/CircularProgress'
 
 
 export const Home: React.FC = () => {
+    const dispatch = useDispatch()
     const classes = useHomeStyles()
+    const tweets = useSelector(selectTweetsItems)
+    const isLoading = useSelector(selectTweetsIsLoading)
+
+    React.useEffect(() => {
+        dispatch(fetchTweets())
+    }, [dispatch])
 
     return (
         <Container className={classes.wrapper} maxWidth={'lg'}>
@@ -40,21 +51,16 @@ export const Home: React.FC = () => {
                             </div>
                             <div className={classes.addFormBottomLine}/>
                         </Paper>
-                        {[...new Array(20).fill(
+                        {isLoading ? (
+                            <div className={classes.tweetsCentered}><CircularProgress/></div>
+                        ) : tweets.map(tweet =>
                             <Tweet
-                                text={`Многие думают, что Lorem Ipsum - взятый с потолка псевдо-латинский набор слов, 
-                            но это не совсем так. Его корни уходят в один фрагмент классической латыни 45 года н.э., 
-                            то есть более двух тысячелетий назад.`
-                                }
+                                key={tweet._id}
                                 classes={classes}
-                                user={{
-                                    fullName: 'Zina Ivano',
-                                    userName: 'ZinaIvano',
-                                    avatarUrl: `https://images.unsplash.com/photo-1605020614138-eef9ad0c5164?ixlib=
-                                rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=700&q=80`
-                                }}
+                                text={tweet.text}
+                                user={tweet.user}
                             />
-                        )]}
+                        )}
                     </Paper>
                 </Grid>
                 <Grid sm={3} md={3} item>

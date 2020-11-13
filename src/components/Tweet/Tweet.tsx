@@ -11,17 +11,6 @@ import Paper from '@material-ui/core/Paper'
 import {useHomeStyles} from '../../pages/Home/homeTheme'
 
 
-// interface ITweetProps {
-//     text: string
-//     classes: ReturnType<typeof useHomeStyles>
-//     user: {
-//         fullName: string,
-//         userName: string,
-//         avatarUrl: string,
-//     }
-// }
-
-
 type TweetPropsType = {
     text: string
     classes: ReturnType<typeof useHomeStyles>
