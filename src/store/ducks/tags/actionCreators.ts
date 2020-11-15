@@ -3,7 +3,7 @@ import {LoadingState, TagsStateType} from './contracts/state'
 export enum TagsActionsType {
     SET_TAGS = 'tags/SET_TAGS',
     FETCH_TAGS = 'tags/FETCH_TAGS',
-    SET_TWEETS_LOADING_STATE = 'tags/SET_TWEETS_LOADING_STATE',
+    SET_TAGS_LOADING_STATE = 'tags/SET_TAGS_LOADING_STATE',
 }
 
 export type SetTagsActionType = {
@@ -16,7 +16,7 @@ export type fetchTagsActionType = {
 }
 
 export type SetTagsLoadingStateActionType = {
-    type: TagsActionsType.SET_TWEETS_LOADING_STATE
+    type: TagsActionsType.SET_TAGS_LOADING_STATE
     payload: LoadingState,
 }
 
@@ -30,7 +30,7 @@ export const setTags = (payload: TagsStateType['items']): SetTagsActionType => (
 })
 
 export const setTagsLoadingState = (payload: LoadingState): SetTagsLoadingStateActionType => ({
-    type: TagsActionsType.SET_TWEETS_LOADING_STATE,
+    type: TagsActionsType.SET_TAGS_LOADING_STATE,
     payload,
 })
 

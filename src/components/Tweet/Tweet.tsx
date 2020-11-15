@@ -9,9 +9,11 @@ import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder'
 import ReplyOutlinedIcon from '@material-ui/icons/ReplyOutlined'
 import Paper from '@material-ui/core/Paper'
 import {useHomeStyles} from '../../pages/Home/homeTheme'
+import {Link} from 'react-router-dom'
 
 
 type TweetPropsType = {
+    _id: string
     text: string
     classes: ReturnType<typeof useHomeStyles>
     user: {
@@ -22,46 +24,48 @@ type TweetPropsType = {
 }
 
 
-export const Tweet: React.FC<TweetPropsType> = ({text, classes, user}) => {
+export const Tweet: React.FC<TweetPropsType> = ({_id, text, classes, user}) => {
     return (
-        <Paper className={classNames(classes.tweet, classes.tweetsHeader)} variant={'outlined'}>
-            <Avatar className={classes.tweetAvatar}
-                    alt={`Аватарка пользователя ${user.fullName}`}
-                    src={user.avatarUrl}
-            />
-            <div>
-                <Typography>
-                    <b>{user.fullName}</b>&nbsp;
-                    <span className={classes.tweetUserName}>@{user.userName}</span>&nbsp;
-                    <span className={classes.tweetUserName}>&middot;</span>&nbsp;
-                    <span className={classes.tweetUserName}>1 ч</span>
-                </Typography>
-                <Typography variant={'body1'} gutterBottom>
-                    {text}
-                </Typography>
-                <div className={classes.tweetFooter}>
-                    <div>
-                        <IconButton>
-                            <ChatBubbleOutlineIcon/>
-                        </IconButton>
-                    </div>
-                    <div>
-                        <IconButton>
-                            <RepeatIcon/>
-                        </IconButton>
-                    </div>
-                    <div>
-                        <IconButton>
-                            <FavoriteBorderIcon/>
-                        </IconButton>
-                    </div>
-                    <div>
-                        <IconButton>
-                            <ReplyOutlinedIcon/>
-                        </IconButton>
+        <Link className={classes.tweetWrapper} to={`/home/tweet/${_id}`}>
+            <Paper className={classNames(classes.tweet, classes.tweetsHeader)} variant={'outlined'}>
+                <Avatar className={classes.tweetAvatar}
+                        alt={`Аватарка пользователя ${user.fullName}`}
+                        src={user.avatarUrl}
+                />
+                <div>
+                    <Typography>
+                        <b>{user.fullName}</b>&nbsp;
+                        <span className={classes.tweetUserName}>@{user.userName}</span>&nbsp;
+                        <span className={classes.tweetUserName}>&middot;</span>&nbsp;
+                        <span className={classes.tweetUserName}>1 ч</span>
+                    </Typography>
+                    <Typography variant={'body1'} gutterBottom>
+                        {text}
+                    </Typography>
+                    <div className={classes.tweetFooter}>
+                        <div>
+                            <IconButton>
+                                <ChatBubbleOutlineIcon/>
+                            </IconButton>
+                        </div>
+                        <div>
+                            <IconButton>
+                                <RepeatIcon/>
+                            </IconButton>
+                        </div>
+                        <div>
+                            <IconButton>
+                                <FavoriteBorderIcon/>
+                            </IconButton>
+                        </div>
+                        <div>
+                            <IconButton>
+                                <ReplyOutlinedIcon/>
+                            </IconButton>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </Paper>
+            </Paper>
+        </Link>
     )
 }

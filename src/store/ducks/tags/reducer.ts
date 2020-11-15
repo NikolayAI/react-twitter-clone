@@ -9,7 +9,7 @@ const initialTagsState: TagsStateType = {
 }
 
 
-export const tweetsReducer = produce((draft: Draft<TagsStateType>, action: TagsActions) => {
+export const tagsReducer = produce((draft: Draft<TagsStateType>, action: TagsActions) => {
     switch (action.type) {
         case TagsActionsType.FETCH_TAGS:
             draft.items = []
@@ -19,7 +19,7 @@ export const tweetsReducer = produce((draft: Draft<TagsStateType>, action: TagsA
             draft.items = action.payload
             draft.loadingState = LoadingState.LOADED
             break
-        case TagsActionsType.SET_TWEETS_LOADING_STATE:
+        case TagsActionsType.SET_TAGS_LOADING_STATE:
             draft.loadingState = action.payload
             break
         default:

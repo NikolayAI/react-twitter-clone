@@ -1,5 +1,5 @@
 import axios from 'axios'
-import {TagsStateType} from '../../store/tags/contracts/state'
+import {TagsStateType} from '../../store/ducks/tags/contracts/state'
 
 
 export const tagsApi = {

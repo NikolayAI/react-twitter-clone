@@ -20,17 +20,3 @@ export type TweetsStateType = {
     items: Array<TweetType>
     loadingState: LoadingState
 }
-
-// export interface ITweet {
-//     text: string
-//     user: {
-//         fullName: string,
-//         userName: string,
-//         avatarUrl: string,
-//     },
-// }
-
-// export interface ITweetsState {
-//     items: Array<ITweet>,
-//     loadingState: LoadingState,
-// }
