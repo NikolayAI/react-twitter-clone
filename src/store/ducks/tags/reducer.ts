@@ -1,6 +1,6 @@
 import {LoadingState, TagsStateType} from './contracts/state'
 import produce, {Draft} from 'immer'
-import {TagsActions, TagsActionsType} from './actionCreators'
+import {TagsActions, TagsActionsType} from './contracts/actionTypes'
 
 
 const initialTagsState: TagsStateType = {

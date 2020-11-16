@@ -1,31 +1,13 @@
-import {LoadingState, TweetsStateType} from './contracts/state'
-
-export enum TweetsActionsType {
-    SET_TWEETS = 'tweets/SET_TWEETS',
-    FETCH_TWEETS = 'tweets/FETCH_TWEETS',
-    SET_TWEETS_LOADING_STATE = 'tweets/SET_TWEETS_LOADING_STATE',
-}
-
-
-// export interface ISetTweetsAction extends Action<TweetsActionsType>{
-//     type: TweetsActionsType.SET_TWEETS,
-//     payload: TweetsStateType['items'],
-// }
-
-
-export type SetTweetsActionType = {
-    type: TweetsActionsType.SET_TWEETS
-    payload: TweetsStateType['items']
-}
-
-export type fetchTweetsActionType = {
-    type: TweetsActionsType.FETCH_TWEETS
-}
-
-export type SetTweetsLoadingStateActionType = {
-    type: TweetsActionsType.SET_TWEETS_LOADING_STATE
-    payload: LoadingState,
-}
+import {AddFormState, LoadingState, TweetsStateType, TweetType} from './contracts/state'
+import {
+    AddTweetActionType,
+    FetchAddTweetActionType,
+    fetchTweetsActionType,
+    SetAddFormStateActionType,
+    SetTweetsActionType,
+    SetTweetsLoadingStateActionType,
+    TweetsActionsType
+} from './contracts/actionTypes'
 
 export const fetchTweets = (): fetchTweetsActionType => ({
     type: TweetsActionsType.FETCH_TWEETS,
@@ -36,12 +18,23 @@ export const setTweets = (payload: TweetsStateType['items']): SetTweetsActionTyp
     payload,
 })
 
+export const fetchAddTweet = (payload: string): FetchAddTweetActionType => ({
+    type: TweetsActionsType.FETCH_ADD_TWEET,
+    payload,
+})
+
+export const addTweet = (payload: TweetType): AddTweetActionType => ({
+    type: TweetsActionsType.ADD_TWEET,
+    payload,
+})
+
 export const setTweetsLoadingState = (payload: LoadingState): SetTweetsLoadingStateActionType => ({
     type: TweetsActionsType.SET_TWEETS_LOADING_STATE,
     payload,
 })
 
-export type TweetsActions =
-    | SetTweetsActionType
-    | fetchTweetsActionType
-    | SetTweetsLoadingStateActionType
+export const setAddFormState = (payload: AddFormState): SetAddFormStateActionType => ({
+    type: TweetsActionsType.SET_ADD_FORM_STATE,
+    payload,
+})
+

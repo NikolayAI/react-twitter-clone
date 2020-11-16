@@ -1,11 +1,10 @@
 import {LoadingState, TweetStateType} from './contracts/state'
-import {fetchTweetDataActionType, SetTweetActionType, SetTweetLoadingStateActionType} from './contracts/actionTypes'
-
-export enum TweetActionsType {
-    FETCH_TWEET_DATA = 'tweet/FETCH_TWEET_DATA',
-    SET_TWEET_DATA = 'tweet/SET_TWEET_DATA',
-    SET_TWEET_LOADING_STATE = 'tweet/SET_TWEET_LOADING_STATE',
-}
+import {
+    fetchTweetDataActionType,
+    SetTweetActionType,
+    SetTweetLoadingStateActionType,
+    TweetActionsType
+} from './contracts/actionTypes'
 
 export const fetchTweetData = (payload: string): fetchTweetDataActionType => ({
     type: TweetActionsType.FETCH_TWEET_DATA,
@@ -22,7 +21,3 @@ export const setTweetLoadingState = (payload: LoadingState): SetTweetLoadingStat
     payload,
 })
 
-export type TweetActions =
-    | fetchTweetDataActionType
-    | SetTweetActionType
-    | SetTweetLoadingStateActionType

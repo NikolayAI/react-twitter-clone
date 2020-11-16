@@ -1,6 +1,6 @@
 import {LoadingState, TweetStateType} from './contracts/state'
 import produce, {Draft} from 'immer'
-import {TweetActions, TweetActionsType} from './actionCreators'
+import {TweetActions, TweetActionsType} from './contracts/actionTypes'
 
 
 const initialTweetState: TweetStateType = {

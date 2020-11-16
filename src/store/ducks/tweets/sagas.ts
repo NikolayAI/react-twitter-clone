@@ -1,7 +1,8 @@
 import {call, put, takeLatest} from 'redux-saga/effects'
-import {setTweets, setTweetsLoadingState, TweetsActionsType} from './actionCreators'
+import {addTweet, setAddFormState, setTweets, setTweetsLoadingState} from './actionCreators'
 import {tweetsApi} from '../../../services/api/tweetsApi'
-import {LoadingState} from './contracts/state'
+import {AddFormState, LoadingState, TweetType} from './contracts/state'
+import {FetchAddTweetActionType, TweetsActionsType} from './contracts/actionTypes'
 
 
 function* fetchTweetsRequest() {
@@ -12,6 +13,26 @@ function* fetchTweetsRequest() {
         yield put(setTweetsLoadingState(LoadingState.ERROR))
     }
 }
+
+function* fetchTweetRequest({payload}: FetchAddTweetActionType) {
+    try {
+        const data: TweetType = {
+            _id: Math.random().toString(36).substr(2),
+            text: payload,
+            user: {
+                fullName: 'Test User',
+                userName: 'test',
+                avatarUrl: 'https://source.unsplash.com/random/100x100?5',
+            },
+        }
+        const item = yield call(tweetsApi.addTweet, data)
+        yield put(addTweet(item))
+    } catch (error) {
+        yield put(setAddFormState(AddFormState.ERROR))
+    }
+}
+
 export function* tweetsSaga() {
     yield takeLatest(TweetsActionsType.FETCH_TWEETS, fetchTweetsRequest)
+    yield takeLatest(TweetsActionsType.FETCH_ADD_TWEET, fetchTweetRequest)
 }
