@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useState} from 'react'
 import Avatar from '@material-ui/core/Avatar'
 import TextareaAutosize from '@material-ui/core/TextareaAutosize'
 import classNames from 'classnames'
@@ -12,13 +12,7 @@ import {useDispatch, useSelector} from 'react-redux'
 import {fetchAddTweet} from '../../store/ducks/tweets/actionCreators'
 import {selectAddFormState} from '../../store/ducks/tweets/selectors'
 import {AddFormState} from '../../store/ducks/tweets/contracts/state'
-import Snackbar from '@material-ui/core/Snackbar'
-
-
-// interface IAddTweetFormProps {
-//     classes: ReturnType<typeof useHomeStyles>
-//     maxRows: number
-// }
+import Alert from '@material-ui/lab/Alert'
 
 
 type AddTweetFormPropsType = {
@@ -31,14 +25,9 @@ const MAX_LENGTH = 280
 
 
 export const AddTweetForm: React.FC<AddTweetFormPropsType> = ({classes, maxRows}) => {
-    const [visibleNotification, setVisibleNotification] = React.useState(false)
     const dispatch = useDispatch()
     const [text, setText] = useState('')
     const addFormState = useSelector(selectAddFormState)
-
-    useEffect(() => {
-        setVisibleNotification(true)
-    }, [addFormState])
 
 
     const textLimitPercent = Math.round(text.length / 280 * 100)
@@ -54,16 +43,9 @@ export const AddTweetForm: React.FC<AddTweetFormPropsType> = ({classes, maxRows}
         dispatch(fetchAddTweet(text))
         setText('')
     }
-    const handleCloseNotification = () => setVisibleNotification(false)
 
     return (
         <div>
-            <Snackbar
-                open={visibleNotification}
-                onClose={handleCloseNotification}
-                message="Ошибка при создании твита"
-                anchorOrigin={{vertical: 'top', horizontal: 'right'}}
-            />
             <div className={classes.addFormBody}>
                 <Avatar className={classes.tweetAvatar}
                         alt={`Аватарка пользователя UserAvatar`}
@@ -109,10 +91,14 @@ export const AddTweetForm: React.FC<AddTweetFormPropsType> = ({classes, maxRows}
                             color={'primary'}
                             variant={'contained'}
                     >
-                        Твитнуть
+                        {addFormState === AddFormState.LOADING
+                            ? <CircularProgress color={'inherit'} size={16}/>
+                            : 'Твитнуть'
+                        }
                     </Button>
                 </div>
             </div>
+            {addFormState === AddFormState.ERROR && <Alert severity="error">Ошибка при добавлении твита</Alert>}
         </div>
     )
 }
