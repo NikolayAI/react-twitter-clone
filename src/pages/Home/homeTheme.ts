@@ -209,4 +209,5 @@ export const useHomeStyles = makeStyles((theme: Theme) => ({
         display: 'flex',
         alignItems: 'center',
     },
+    addFormBottomRightSide: {},
 }))
