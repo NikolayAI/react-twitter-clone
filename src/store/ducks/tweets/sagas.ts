@@ -20,12 +20,13 @@ function* fetchTweetRequest({payload}: FetchAddTweetActionType) {
             _id: Math.random().toString(36).substr(2),
             text: payload,
             user: {
-                fullName: 'Test User',
-                userName: 'test',
+                fullname: 'Test User',
+                username: 'test',
                 avatarUrl: 'https://source.unsplash.com/random/100x100?5',
+                email: 't@t'
             },
         }
-        const item = yield call(tweetsApi.addTweet, data)
+        const item = yield call(tweetsApi.addTweet, data.text)
         yield put(addTweet(item))
     } catch (error) {
         yield put(setAddFormState(AddFormState.ERROR))

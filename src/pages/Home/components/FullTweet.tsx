@@ -31,13 +31,13 @@ export const FullTweet: React.FC = () => {
             <Paper className={classes.fullTweet}>
                 <div className={classNames(classes.tweetsHeaderUser)} >
                     <Avatar className={classes.tweetAvatar}
-                            alt={`Аватарка пользователя ${tweetData.user.fullName}`}
+                            alt={`Аватарка пользователя ${tweetData.user.fullname}`}
                             src={tweetData.user.avatarUrl}
                     />
                     <Typography>
-                        <b>{tweetData.user.fullName}</b>&nbsp;
+                        <b>{tweetData.user.fullname}</b>&nbsp;
                         <div>
-                            <span className={classes.tweetUserName}>@{tweetData.user.userName}</span>&nbsp;
+                            <span className={classes.tweetUserName}>@{tweetData.user.username}</span>&nbsp;
                             <span className={classes.tweetUserName}>&middot;</span>&nbsp;
                             <span className={classes.tweetUserName}>1 ч</span>
                         </div>
