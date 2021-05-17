@@ -10,12 +10,14 @@ import ReplyOutlinedIcon from '@material-ui/icons/ReplyOutlined';
 import Paper from '@material-ui/core/Paper';
 import { useHomeStyles } from '../../pages/Home/homeTheme';
 import { Link } from 'react-router-dom';
+import { formatDate } from '../../utils/formatDate';
 
 
 type TweetPropsType = {
   _id: string
   text: string
   classes: ReturnType<typeof useHomeStyles>
+  createdAt: string
   user: {
     fullname: string,
     username: string,
@@ -29,9 +31,11 @@ export const Tweet: React.FC<TweetPropsType> = (
     _id,
     text,
     classes,
-    user
+    user,
+    createdAt,
   }
 ) => {
+  console.log(formatDate(new Date(createdAt)));
   return (
     <Link className={classes.tweetWrapper} to={`/home/tweet/${_id}`}>
       <Paper
@@ -48,7 +52,7 @@ export const Tweet: React.FC<TweetPropsType> = (
             <span
               className={classes.tweetUserName}>@{user.email}</span>&nbsp;
             <span className={classes.tweetUserName}>&middot;</span>&nbsp;
-            <span className={classes.tweetUserName}>1 ч</span>
+            <span className={classes.tweetUserName}>{formatDate(new Date(createdAt))}</span>
           </Typography>
           <Typography variant={'body1'} gutterBottom>
             {text}

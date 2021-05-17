@@ -82,6 +82,7 @@ export const Home: React.FC = () => {
                   classes={classes}
                   text={tweet.text}
                   user={tweet.user}
+                  createdAt={tweet.createdAt}
                 />
               )}
             </Route>

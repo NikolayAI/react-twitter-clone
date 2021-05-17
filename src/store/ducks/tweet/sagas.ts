@@ -8,8 +8,8 @@ import {TweetType} from '../tweets/contracts/state'
 
 function* fetchTweetDataRequest({payload: tweetId}: fetchTweetDataActionType) {
     try {
-        const data: Array<TweetType> = yield call(tweetsApi.fetchTweetData, tweetId)
-        yield put(setTweetData(data[0]))
+        const data: TweetType = yield call(tweetsApi.fetchTweetData, tweetId)
+        yield put(setTweetData(data))
     } catch (error) {
         yield put(setTweetLoadingState(LoadingState.ERROR))
     }

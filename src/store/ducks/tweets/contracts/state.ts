@@ -15,6 +15,7 @@ export enum AddFormState {
 export type TweetType = {
     _id: string
     text: string
+    createdAt: string
     user: {
         fullname: string,
         username: string,

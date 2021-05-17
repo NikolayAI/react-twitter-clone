@@ -1,5 +1,4 @@
-import axios from 'axios';
-
+import { axios } from '../../core/axios';
 import { TweetType } from '../../store/ducks/tweets/contracts/state';
 
 
@@ -17,8 +16,8 @@ export const tweetsApi = {
     const { data } = await axios.get<Response<TweetType>>(`/tweets/${id}`);
     return data.data;
   },
-  async addTweet(data: string): Promise<TweetType> {
-    const { data: data_1 } = await axios.post('/tweets', {text: data});
-    return data_1;
+  async addTweet(payload: string): Promise<TweetType> {
+    const { data } = await axios.post<Response<TweetType>>('/tweets', { text: payload });
+    return data.data;
   },
 };
