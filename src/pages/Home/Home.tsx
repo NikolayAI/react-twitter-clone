@@ -31,7 +31,6 @@ import { Route } from 'react-router-dom';
 import { BackButton } from '../../components/BackButton/BackButton';
 import { FullTweet } from './components/FullTweet';
 
-
 export const Home: React.FC = () => {
 
   const dispatch = useDispatch();

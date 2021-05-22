@@ -1,7 +1,6 @@
 import { axios } from '../../core/axios';
 import { TweetType } from '../../store/ducks/tweets/contracts/state';
 
-
 interface Response<T> {
   status: string
   data: T

@@ -14,7 +14,6 @@ import { selectAddFormState } from '../../store/ducks/tweets/selectors';
 import { AddFormState } from '../../store/ducks/tweets/contracts/state';
 import Alert from '@material-ui/lab/Alert';
 
-
 type AddTweetFormPropsType = {
   classes: ReturnType<typeof useHomeStyles>
   maxRows?: number

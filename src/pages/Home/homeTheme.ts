@@ -2,7 +2,6 @@ import makeStyles from '@material-ui/core/styles/makeStyles';
 import { Theme } from '@material-ui/core';
 import grey from '@material-ui/core/colors/grey';
 
-
 export const useHomeStyles = makeStyles((theme: Theme) => ({
   wrapper: {
     height: '100vh',

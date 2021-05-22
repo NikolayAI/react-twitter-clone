@@ -14,7 +14,6 @@ import { useHistory } from 'react-router-dom';
 import { formatDate } from '../../utils/formatDate';
 import { Menu, MenuItem } from '@material-ui/core';
 
-
 type TweetPropsType = {
   _id: string
   text: string
@@ -43,8 +42,8 @@ export const Tweet: React.FC<TweetPropsType> = (
 
   const handleClickTweet = (event: React.MouseEvent<HTMLAnchorElement>): void => {
     event.preventDefault();
-    history.push(`/home/tweet/${_id}`)
-  }
+    history.push(`/home/tweet/${_id}`);
+  };
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     event.stopPropagation();
@@ -57,7 +56,8 @@ export const Tweet: React.FC<TweetPropsType> = (
   };
 
   return (
-    <a className={classes.tweetWrapper} onClick={handleClickTweet} href={`/home/tweet/${_id}`}>
+    <a className={classes.tweetWrapper} onClick={handleClickTweet}
+       href={`/home/tweet/${_id}`}>
       <Paper
         className={classNames(classes.tweet, classes.tweetsHeader)}
         variant={'outlined'}>

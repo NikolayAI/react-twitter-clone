@@ -15,9 +15,8 @@ import classNames from 'classnames';
 import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
-import format from 'date-fns/format'
+import format from 'date-fns/format';
 import ruLang from 'date-fns/locale/ru';
-
 
 export const FullTweet: React.FC = () => {
   const classes = useHomeStyles();
@@ -54,10 +53,10 @@ export const FullTweet: React.FC = () => {
                 @{tweetData.user.username}
               </span>&nbsp;
               <span className={classes.tweetUserName}>
-                {format(new Date(tweetData.createdAt), 'H:mm:ss', {locale: ruLang})}
+                {format(new Date(tweetData.createdAt), 'H:mm:ss', { locale: ruLang })}
               </span>&nbsp;
               <span className={classes.tweetUserName}>
-                {format(new Date(tweetData.createdAt), 'dd MMM. yyyy г.', {locale: ruLang})}
+                {format(new Date(tweetData.createdAt), 'dd MMM. yyyy г.', { locale: ruLang })}
               </span>
             </div>
           </Typography>

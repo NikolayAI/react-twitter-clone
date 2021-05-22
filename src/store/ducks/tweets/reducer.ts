@@ -2,13 +2,11 @@ import { AddFormState, LoadingState, TweetsStateType } from './contracts/state';
 import produce, { Draft } from 'immer';
 import { TweetsActions, TweetsActionsType } from './contracts/actionTypes';
 
-
 const initialTweetsState: TweetsStateType = {
   items: [],
   loadingState: LoadingState.NEVER,
   addFormState: AddFormState.NEVER,
 };
-
 
 export const tweetsReducer = produce((draft: Draft<TweetsStateType>, action: TweetsActions) => {
   switch (action.type) {

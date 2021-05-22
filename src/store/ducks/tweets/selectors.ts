@@ -1,11 +1,10 @@
 import { RootStateType } from '../../store';
 import { AddFormState, LoadingState } from './contracts/state';
 
-
 export const selectTweetsState = (state: RootStateType) => state.tweets;
 
 export const selectTweetsItems = (state: RootStateType) =>
-  selectTweetsState(state).items
+  selectTweetsState(state).items;
 
 export const selectTweetsLoadingState = (state: RootStateType): LoadingState =>
   selectTweetsState(state).loadingState;
