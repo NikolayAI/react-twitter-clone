@@ -23,7 +23,7 @@ export const Notification: React.FC<INotification> = ({ children }) => {
         autoHideDuration={6000}
         onClose={() => setOpen(false)}
       >
-        <Alert onClose={() => setOpen(false)} severity="error">
+        <Alert onClose={() => setOpen(false)} severity={notificationObj?.type}>
           {notificationObj?.text}
         </Alert>
       </Snackbar>

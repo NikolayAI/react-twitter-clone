@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import FormControl from '@material-ui/core/FormControl';
 import FormGroup from '@material-ui/core/FormGroup';
 import TextField from '@material-ui/core/TextField';
@@ -10,7 +10,10 @@ import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Notification } from '../../../components/Notification/Notification';
 import { Color } from '@material-ui/lab/Alert';
-import { authApi } from '../../../services/api/authApi';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchSignIn } from '../../../store/ducks/user/actionCreators';
+import { selectUserStatus } from '../../../store/ducks/user/selectors';
+import { LoadingState } from '../../../store/types';
 
 interface ILoginModal {
   open: boolean;
@@ -32,89 +35,96 @@ export const LoginModal: React.FC<ILoginModal> = ({
   onClose,
 }) => {
   const classes = useStylesSignIn();
+  const dispatch = useDispatch();
+  const loadingStatus = useSelector(selectUserStatus);
+  const openNotificationRef = useRef<(text: string, type: Color) => void>(() => {
+  });
+
+  useEffect(() => {
+    if (loadingStatus === LoadingState.SUCCESS) {
+      openNotificationRef.current('Вы авторизованы', 'success');
+    } else if (loadingStatus === LoadingState.ERROR) {
+      openNotificationRef.current('Неверный логин или пароль', 'error');
+    }
+  }, [loadingStatus]);
 
   const { control, handleSubmit, formState: { errors } } = useForm<ILoginForm>({
     resolver: yupResolver(LoginFormSchema)
   });
 
-  const onSubmit = async (
-    openNotification: (text: string, type: Color) => void,
-    data: ILoginForm,
-  ) => {
-    try {
-      const userData = await authApi.signIn(data)
-      openNotification('Вы авторизованы', 'success')
-    } catch (error) {
-      openNotification('Неверный логин или пароль', 'error')
-    }
+  const onSubmit = async (data: ILoginForm) => {
+    dispatch(fetchSignIn(data));
   };
 
   return (
     <Notification>
-      {openNotification => (
-        <ModalBlock
-          onClose={onClose}
-          visible={open}
-          title="Войти в аккаунт"
-        >
-          <form onSubmit={handleSubmit(onSubmit.bind(null, openNotification))}>
-            <FormControl
-              className={classes.loginFormControl}
-              component="fieldset" fullWidth
-            >
-              <FormGroup aria-label="position" row>
-                <Controller
-                  control={control}
-                  defaultValue=""
-                  name="email"
-                  render={({ field }) => <TextField
-                    {...field}
+      {callback => {
+        openNotificationRef.current = callback;
+        return (
+          <ModalBlock
+            onClose={onClose}
+            visible={open}
+            title="Войти в аккаунт"
+          >
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <FormControl
+                className={classes.loginFormControl}
+                component="fieldset" fullWidth
+              >
+                <FormGroup aria-label="position" row>
+                  <Controller
+                    control={control}
+                    defaultValue=""
                     name="email"
+                    render={({ field }) => <TextField
+                      {...field}
+                      name="email"
+                      defaultValue=""
+                      className={classes.loginSideField}
+                      id="email"
+                      label="E-mail"
+                      InputLabelProps={{ shrink: true }}
+                      variant="filled"
+                      type="email"
+                      helperText={errors.email?.message}
+                      error={!!errors.email}
+                      fullWidth
+                      autoFocus
+                    />}
+                  />
+                  <Controller
+                    control={control}
                     defaultValue=""
-                    className={classes.loginSideField}
-                    id="email"
-                    label="E-mail"
-                    InputLabelProps={{ shrink: true }}
-                    variant="filled"
-                    type="email"
-                    helperText={errors.email?.message}
-                    error={!!errors.email}
-                    fullWidth
-                    autoFocus
-                  />}
-                />
-                <Controller
-                  control={control}
-                  defaultValue=""
-                  name="password"
-                  render={({ field }) => <TextField
-                    {...field}
                     name="password"
-                    defaultValue=""
-                    className={classes.loginSideField}
-                    id="password"
-                    label="Пароль"
-                    InputLabelProps={{ shrink: true }}
-                    variant="filled"
-                    type="password"
-                    helperText={errors.password?.message}
-                    error={!!errors.password}
+                    render={({ field }) => <TextField
+                      {...field}
+                      name="password"
+                      defaultValue=""
+                      className={classes.loginSideField}
+                      id="password"
+                      label="Пароль"
+                      InputLabelProps={{ shrink: true }}
+                      variant="filled"
+                      type="password"
+                      helperText={errors.password?.message}
+                      error={!!errors.password}
+                      fullWidth
+                    />}
+                  />
+                  <Button
+                    type="submit"
+                    variant="contained"
+                    color="primary"
                     fullWidth
-                  />}
-                />
-                <Button
-                  type="submit"
-                  variant="contained"
-                  color="primary"
-                  fullWidth
-                >
-                  Войти
-                </Button>
-              </FormGroup>
-            </FormControl>
-          </form>
-        </ModalBlock>
-      )}
+                  >
+                    Войти
+                  </Button>
+                </FormGroup>
+              </FormControl>
+            </form>
+          </ModalBlock>
+        );
+      }}
     </Notification>
   );
 };

@@ -1,6 +1,6 @@
 import { RootStateType } from '../../store';
 import { createSelector } from 'reselect';
-import { LoadingState } from './contracts/state';
+import { LoadingState } from '../../types';
 
 export const selectTags = (state: RootStateType) => state.tags;
 export const selectTagsItems = createSelector(selectTags, tags => tags.items);

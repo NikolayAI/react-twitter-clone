@@ -1,4 +1,5 @@
-import { LoadingState, TweetStateType } from './state';
+import { TweetStateType } from './state';
+import { LoadingState } from '../../../types';
 
 export enum TweetActionsType {
   FETCH_TWEET_DATA = 'tweet/FETCH_TWEET_DATA',

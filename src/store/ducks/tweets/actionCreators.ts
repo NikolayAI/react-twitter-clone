@@ -1,6 +1,5 @@
 import {
   AddFormState,
-  LoadingState,
   TweetsStateType,
   TweetType
 } from './contracts/state';
@@ -13,6 +12,7 @@ import {
   SetTweetsLoadingStateActionType,
   TweetsActionsType
 } from './contracts/actionTypes';
+import { LoadingState } from '../../types';
 
 export const fetchTweets = (): fetchTweetsActionType => ({
   type: TweetsActionsType.FETCH_TWEETS,

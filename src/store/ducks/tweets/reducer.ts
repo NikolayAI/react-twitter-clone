@@ -1,6 +1,7 @@
-import { AddFormState, LoadingState, TweetsStateType } from './contracts/state';
+import { AddFormState, TweetsStateType } from './contracts/state';
 import produce, { Draft } from 'immer';
 import { TweetsActions, TweetsActionsType } from './contracts/actionTypes';
+import { LoadingState } from '../../types';
 
 const initialTweetsState: TweetsStateType = {
   items: [],

@@ -1,4 +1,5 @@
-import { AddFormState, LoadingState, TweetsStateType, TweetType } from './state';
+import { AddFormState, TweetsStateType, TweetType } from './state';
+import { LoadingState } from '../../../types';
 
 export enum TweetsActionsType {
   SET_TWEETS = 'tweets/SET_TWEETS',

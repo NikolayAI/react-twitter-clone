@@ -1,6 +1,7 @@
-import { LoadingState, TagsStateType } from './contracts/state';
+import { TagsStateType } from './contracts/state';
 import produce, { Draft } from 'immer';
 import { TagsActions, TagsActionsType } from './contracts/actionTypes';
+import { LoadingState } from '../../types';
 
 const initialTagsState: TagsStateType = {
   items: [],

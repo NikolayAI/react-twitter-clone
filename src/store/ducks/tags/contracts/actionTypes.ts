@@ -1,4 +1,5 @@
-import { LoadingState, TagsStateType } from './state';
+import {  TagsStateType } from './state';
+import { LoadingState } from '../../../types';
 
 export enum TagsActionsType {
   SET_TAGS = 'tags/SET_TAGS',

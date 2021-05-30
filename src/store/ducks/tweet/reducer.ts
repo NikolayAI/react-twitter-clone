@@ -1,6 +1,7 @@
-import { LoadingState, TweetStateType } from './contracts/state';
+import { TweetStateType } from './contracts/state';
 import produce, { Draft } from 'immer';
 import { TweetActions, TweetActionsType } from './contracts/actionTypes';
+import { LoadingState } from '../../types';
 
 const initialTweetState: TweetStateType = {
   data: undefined,
