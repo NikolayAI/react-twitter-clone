@@ -13,11 +13,11 @@ export const userReducer = produce((draft: Draft<IUserState>, action: UserAction
 
     case UserActionsType.SET_USER_DATA:
       draft.data = action.payload;
-      draft.status = LoadingState.LOADED;
+      draft.status = LoadingState.SUCCESS;
       break;
 
     case UserActionsType.SET_LOADING_STATE:
-      draft.status = LoadingState.LOADED;
+      draft.status = action.payload;
       break;
 
     default:

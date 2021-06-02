@@ -13,5 +13,9 @@ export const authApi = {
       password: postData.password
     });
     return data;
+  },
+  async me(): Promise<IResponseApi> {
+    const { data } = await axios.get<IResponseApi>('/users/me');
+    return data;
   }
 };

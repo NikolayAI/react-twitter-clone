@@ -6,8 +6,9 @@ import { LoadingState } from '../../types';
 
 function* fetchSignInRequest({ payload }: IFetchSignIn) {
   try {
-    const data = yield call(authApi.signIn, payload);
+    const { data } = yield call(authApi.signIn, payload);
     yield put(setUserData(data));
+    window.localStorage.setItem('token', data.token);
   } catch (error) {
     yield put(setUserLoadingStatus(LoadingState.ERROR));
   }
