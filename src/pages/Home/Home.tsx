@@ -30,6 +30,7 @@ import { fetchTags } from '../../store/ducks/tags/actionCreators';
 import { Route } from 'react-router-dom';
 import { BackButton } from '../../components/BackButton/BackButton';
 import { FullTweet } from './components/FullTweet';
+import { Users } from '../../components/Users/Users';
 
 export const Home: React.FC = () => {
 
@@ -103,36 +104,7 @@ export const Home: React.FC = () => {
               }}
             />
             <Tags classes={classes}/>
-            <Paper className={classes.rightSideBlock}>
-              <Paper className={classes.rightSideBlockHeader}
-                     variant={'outlined'}>
-                <b>Кого читать</b>
-              </Paper>
-              <List>
-                <ListItem className={classes.rightSideBlockItem}>
-                  <ListItemAvatar>
-                    <Avatar
-                      alt={'Yumi Chu'}
-                      src={`https://images.unsplash.com/photo-1602995660357-20e5ebaa4d37?ixlib=
-                                            rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80`
-                      }
-                    />
-                  </ListItemAvatar>
-                  <ListItemText
-                    primary={'Gran Tour'}
-                    secondary={
-                      <Typography component={'span'} variant={'body2'}>
-                        @GranTour
-                      </Typography>
-                    }
-                  />
-                  <Button color={'primary'}>
-                    <PersonAddIcon/>
-                  </Button>
-                </ListItem>
-                <Divider component={'li'}/>
-              </List>
-            </Paper>
+            <Users/>
           </div>
         </Grid>
       </Grid>
