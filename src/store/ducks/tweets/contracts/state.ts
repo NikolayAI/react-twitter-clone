@@ -11,8 +11,8 @@ export type TweetType = {
   text: string
   createdAt: string
   user: {
-    fullname: string,
-    username: string,
+    fullName: string,
+    userName: string,
     avatarUrl: string,
     email: string,
   }

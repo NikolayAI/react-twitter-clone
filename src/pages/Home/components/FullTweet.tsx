@@ -47,10 +47,10 @@ export const FullTweet: React.FC = () => {
             src={tweetData.user.avatarUrl}
           />
           <Typography>
-            <b>{tweetData.user.fullname}</b>&nbsp;
+            <b>{tweetData.user.fullName}</b>&nbsp;
             <div>
               <span className={classes.tweetUserName}>
-                @{tweetData.user.username}
+                @{tweetData.user.userName}
               </span>&nbsp;
               <span className={classes.tweetUserName}>
                 {format(new Date(tweetData.createdAt), 'H:mm:ss', { locale: ruLang })}

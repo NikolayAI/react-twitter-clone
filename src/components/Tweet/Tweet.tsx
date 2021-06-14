@@ -20,8 +20,8 @@ type TweetPropsType = {
   classes: ReturnType<typeof useHomeStyles>
   createdAt: string
   user: {
-    fullname: string,
-    username: string,
+    fullName: string,
+    userName: string,
     avatarUrl: string,
     email: string,
   }
@@ -63,13 +63,13 @@ export const Tweet: React.FC<TweetPropsType> = (
         variant={'outlined'}>
         <Avatar
           className={classes.tweetAvatar}
-          alt={`Аватарка пользователя ${user.fullname}`}
+          alt={`Аватарка пользователя ${user.fullName}`}
           src={user.avatarUrl}
         />
         <div className={classes.tweetContent}>
-          <Typography className={classes.tweetHeader}>
+          <div className={classes.tweetHeader}>
             <div>
-              <b>{user.username}</b>&nbsp;
+              <b>{user.userName}</b>&nbsp;
               <span
                 className={classes.tweetUserName}>@{user.email}</span>&nbsp;
               <span className={classes.tweetUserName}>&middot;</span>&nbsp;
@@ -101,7 +101,7 @@ export const Tweet: React.FC<TweetPropsType> = (
                 </MenuItem>
               </Menu>
             </div>
-          </Typography>
+          </div>
           <Typography variant={'body1'} gutterBottom>
             {text}
           </Typography>

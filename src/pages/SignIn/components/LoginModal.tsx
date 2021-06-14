@@ -27,7 +27,7 @@ export interface ILoginForm {
 
 const LoginFormSchema = yup.object().shape({
   email: yup.string().email('Неверный email').required('Введите email'),
-  password: yup.string().min(6).required(),
+  password: yup.string().min(6, 'Пароль должен состоять минимум из 6 символов').required(),
 });
 
 export const LoginModal: React.FC<ILoginModal> = ({
@@ -58,74 +58,68 @@ export const LoginModal: React.FC<ILoginModal> = ({
   };
 
   return (
-    <Notification>
-      {callback => {
-        openNotificationRef.current = callback;
-        return (
-          <ModalBlock
-            onClose={onClose}
-            visible={open}
-            title="Войти в аккаунт"
-          >
-            <form onSubmit={handleSubmit(onSubmit)}>
-              <FormControl
-                className={classes.loginFormControl}
-                component="fieldset" fullWidth
-              >
-                <FormGroup aria-label="position" row>
-                  <Controller
-                    control={control}
-                    defaultValue=""
-                    name="email"
-                    render={({ field }) => <TextField
-                      {...field}
-                      name="email"
-                      defaultValue=""
-                      className={classes.loginSideField}
-                      id="email"
-                      label="E-mail"
-                      InputLabelProps={{ shrink: true }}
-                      variant="filled"
-                      type="email"
-                      helperText={errors.email?.message}
-                      error={!!errors.email}
-                      fullWidth
-                      autoFocus
-                    />}
-                  />
-                  <Controller
-                    control={control}
-                    defaultValue=""
-                    name="password"
-                    render={({ field }) => <TextField
-                      {...field}
-                      name="password"
-                      defaultValue=""
-                      className={classes.loginSideField}
-                      id="password"
-                      label="Пароль"
-                      InputLabelProps={{ shrink: true }}
-                      variant="filled"
-                      type="password"
-                      helperText={errors.password?.message}
-                      error={!!errors.password}
-                      fullWidth
-                    />}
-                  />
-                  <Button
-                    type="submit"
-                    variant="contained"
-                    color="primary"
-                    fullWidth
-                  >
-                    Войти
-                  </Button>
-                </FormGroup>
-              </FormControl>
-            </form>
-          </ModalBlock>
-        );
-      }}
-    </Notification>
+    <ModalBlock
+      onClose={onClose}
+      visible={open}
+      title="Войти в аккаунт"
+    >
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <FormControl
+          className={classes.loginFormControl}
+          component="fieldset" fullWidth
+        >
+          <FormGroup aria-label="position" row>
+            <Controller
+              control={control}
+              defaultValue=""
+              name="email"
+              render={({ field }) => <TextField
+                {...field}
+                name="email"
+                defaultValue=""
+                className={classes.loginSideField}
+                id="email"
+                label="E-mail"
+                InputLabelProps={{ shrink: true }}
+                variant="filled"
+                type="email"
+                helperText={errors.email?.message}
+                error={!!errors.email}
+                fullWidth
+                autoFocus
+              />}
+            />
+            <Controller
+              control={control}
+              defaultValue=""
+              name="password"
+              render={({ field }) => <TextField
+                {...field}
+                name="password"
+                defaultValue=""
+                className={classes.loginSideField}
+                id="password"
+                label="Пароль"
+                InputLabelProps={{ shrink: true }}
+                variant="filled"
+                type="password"
+                helperText={errors.password?.message}
+                error={!!errors.password}
+                fullWidth
+              />}
+            />
+            <Button
+              disabled={loadingStatus === LoadingState.LOADING}
+              type="submit"
+              variant="contained"
+              color="primary"
+              fullWidth
+            >
+              Войти
+            </Button>
+          </FormGroup>
+        </FormControl>
+      </form>
+    </ModalBlock>
   );
 };
