@@ -27,7 +27,7 @@ function App() {
   }, []);
 
   useEffect(() => {
-    if (!isAuth && isReady) {
+    if (!isAuth && !isReady) {
       history.push('/signin');
     } else {
       history.push('/home');
