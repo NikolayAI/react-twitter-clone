@@ -23,7 +23,7 @@ export const setTweets = (payload: TweetsStateType['items']): SetTweetsActionTyp
   payload,
 });
 
-export const fetchAddTweet = (payload: string): FetchAddTweetActionType => ({
+export const fetchAddTweet = (payload: {text: string, images: string[]}): FetchAddTweetActionType => ({
   type: TweetsActionsType.FETCH_ADD_TWEET,
   payload,
 });

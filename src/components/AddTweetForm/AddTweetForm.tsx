@@ -2,18 +2,19 @@ import React, { useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 import classNames from 'classnames';
-import IconButton from '@material-ui/core/IconButton';
-import ImageOutlinedIcon from '@material-ui/icons/CropOriginalOutlined';
-import EmojiIcon from '@material-ui/icons/SentimentSatisfiedOutlined';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Button from '@material-ui/core/Button';
 import { useHomeStyles } from '../../pages/Home/homeTheme';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchAddTweet } from '../../store/ducks/tweets/actionCreators';
+import {
+  fetchAddTweet,
+  setAddFormState
+} from '../../store/ducks/tweets/actionCreators';
 import { selectAddFormState } from '../../store/ducks/tweets/selectors';
 import { AddFormState } from '../../store/ducks/tweets/contracts/state';
 import Alert from '@material-ui/lab/Alert';
 import { UploadImages } from '../UploadImages/UploadImages';
+import { uploadImage } from '../../utils/uploadImage';
 
 type AddTweetFormPropsType = {
   classes: ReturnType<typeof useHomeStyles>
@@ -22,29 +23,46 @@ type AddTweetFormPropsType = {
 
 const MAX_LENGTH = 280;
 
-export const AddTweetForm: React.FC<AddTweetFormPropsType> = (
-  {
-    classes,
-    maxRows
-  }
-) => {
+export interface IImageObj {
+  blobUrl: string;
+  file: File;
+}
+
+export const AddTweetForm: React.FC<AddTweetFormPropsType> = ({
+  classes,
+  maxRows
+}) => {
   const dispatch = useDispatch();
   const [text, setText] = useState('');
+  const [images, setImages] = useState<IImageObj[]>([]);
   const addFormState = useSelector(selectAddFormState);
-
 
   const textLimitPercent = Math.round(text.length / 280 * 100);
   const textCount = MAX_LENGTH - text.length;
-  const circularProgressStyle = textLimitPercent > 80 && text.length < MAX_LENGTH
-    ? { color: 'orange' } : text.length >= MAX_LENGTH ? { color: 'red' } : undefined;
-
+  const circularProgressStyle = (
+    textLimitPercent > 80 && text.length < MAX_LENGTH
+      ? { color: 'orange' } : text.length >= MAX_LENGTH
+      ? { color: 'red' } : undefined
+  );
 
   const handleChangeTextarea = (e: React.ChangeEvent<HTMLTextAreaElement>): void => {
     if (e.currentTarget) setText(e.currentTarget.value);
   };
-  const handleClickAddTweet = (): void => {
-    dispatch(fetchAddTweet(text));
+  const handleClickAddTweet = async (): Promise<void> => {
+    let result = [];
+    dispatch(setAddFormState(AddFormState.LOADING));
+    for (let i = 0; i < images.length; i++) {
+      const file = images[i].file;
+      try {
+        const { url } = await uploadImage(file);
+        result.push(url);
+      } catch (e) {
+        dispatch(setAddFormState(AddFormState.NEVER));
+      }
+    }
+    dispatch(fetchAddTweet({ text, images: result }));
     setText('');
+    setImages([]);
   };
 
   return (
@@ -66,7 +84,10 @@ export const AddTweetForm: React.FC<AddTweetFormPropsType> = (
       <div className={classes.addFormBottom}>
         <div
           className={classNames(classes.tweetFooter, classes.addFormBottomActions)}>
-          <UploadImages/>
+          <UploadImages
+            images={images}
+            onChangeImages={setImages}
+          />
         </div>
         <div className={classes.addFormBottomRight}>
           {text && <>

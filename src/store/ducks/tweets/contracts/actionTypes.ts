@@ -19,7 +19,7 @@ export type SetTweetsActionType = {
 }
 export type FetchAddTweetActionType = {
   type: TweetsActionsType.FETCH_ADD_TWEET
-  payload: string
+  payload: {text: string, images: string[]}
 }
 export type AddTweetActionType = {
   type: TweetsActionsType.ADD_TWEET

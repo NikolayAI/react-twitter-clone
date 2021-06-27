@@ -224,4 +224,31 @@ export const useHomeStyles = makeStyles((theme: Theme) => ({
     alignItems: 'center',
   },
   addFormBottomRightSide: {},
+  imagesList: {
+    display: 'flex',
+    alignItems: 'center',
+    marginTop: 10,
+    flexWrap: 'wrap',
+  },
+  imagesListItem: {
+    width: 50,
+    height: 50,
+    overflow: 'hidden',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    backgroundRepeat: 'no-repeat',
+    borderRadius: 6,
+    marginRight: 10,
+    marginBottom: 10,
+    '& svg path': {
+      fill: 'white',
+    },
+  },
+  imagesListItemRemove: {
+    position: 'relative',
+    top: -3,
+    right: -32,
+    padding: 0,
+    backgroundColor: 'black',
+  },
 }));
