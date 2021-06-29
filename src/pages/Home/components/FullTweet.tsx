@@ -17,6 +17,7 @@ import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import format from 'date-fns/format';
 import ruLang from 'date-fns/locale/ru';
+import { ImageList } from '../../../components/ImageList/ImageList';
 
 export const FullTweet: React.FC = () => {
   const classes = useHomeStyles();
@@ -43,7 +44,7 @@ export const FullTweet: React.FC = () => {
         <div className={classNames(classes.tweetsHeaderUser)}>
           <Avatar
             className={classes.tweetAvatar}
-            alt={`Аватарка пользователя ${tweetData.user.fullname}`}
+            alt={`Аватарка пользователя ${tweetData.user.fullName}`}
             src={tweetData.user.avatarUrl}
           />
           <Typography>
@@ -85,6 +86,7 @@ export const FullTweet: React.FC = () => {
         </div>
         <Typography className={classes.fullTweetText} gutterBottom>
           {tweetData.text}
+          {tweetData.images && <ImageList images={tweetData.images}/>}
         </Typography>
       </Paper>
     );

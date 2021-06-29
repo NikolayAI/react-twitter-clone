@@ -13,12 +13,16 @@ import { useHomeStyles } from '../../pages/Home/homeTheme';
 import { useHistory } from 'react-router-dom';
 import { formatDate } from '../../utils/formatDate';
 import { Menu, MenuItem } from '@material-ui/core';
+import { ImageList } from '../ImageList/ImageList';
+import { removeTweet } from '../../store/ducks/tweets/actionCreators';
+import { useDispatch } from 'react-redux';
 
 type TweetPropsType = {
   _id: string
   text: string
   classes: ReturnType<typeof useHomeStyles>
   createdAt: string
+  images?: string[]
   user: {
     fullName: string,
     userName: string,
@@ -34,10 +38,12 @@ export const Tweet: React.FC<TweetPropsType> = (
     classes,
     user,
     createdAt,
+    images,
   }
 ) => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const history = useHistory();
+  const dispatch = useDispatch();
   const open = Boolean(anchorEl);
 
   const handleClickTweet = (event: React.MouseEvent<HTMLAnchorElement>): void => {
@@ -51,8 +57,18 @@ export const Tweet: React.FC<TweetPropsType> = (
     setAnchorEl(event.currentTarget);
   };
 
-  const handleClose = () => {
+  const handleClose = (event: React.MouseEvent<HTMLElement>) => {
+    event.stopPropagation();
+    event.preventDefault();
     setAnchorEl(null);
+  };
+
+  const handleRemove = (event: React.MouseEvent<HTMLElement>): void => {
+    console.log('delete');
+    handleClose(event);
+    if (window.confirm('Вы действительно хотите удалить твит?')) {
+      dispatch(removeTweet(_id));
+    }
   };
 
   return (
@@ -96,7 +112,7 @@ export const Tweet: React.FC<TweetPropsType> = (
                 <MenuItem onClick={handleClose}>
                   Редактировать твит
                 </MenuItem>
-                <MenuItem onClick={handleClose}>
+                <MenuItem onClick={(e) => handleRemove(e)}>
                   Удалить твит
                 </MenuItem>
               </Menu>
@@ -104,6 +120,9 @@ export const Tweet: React.FC<TweetPropsType> = (
           </div>
           <Typography variant={'body1'} gutterBottom>
             {text}
+            {images && (
+              <ImageList images={images}/>
+            )}
           </Typography>
           <div className={classes.tweetFooter}>
             <div>

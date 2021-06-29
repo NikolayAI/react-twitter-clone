@@ -7,6 +7,7 @@ export enum TweetsActionsType {
   SET_TWEETS_LOADING_STATE = 'tweets/SET_TWEETS_LOADING_STATE',
   FETCH_ADD_TWEET = 'tweets/FETCH_ADD_TWEET',
   ADD_TWEET = 'tweets/ADD_TWEET',
+  REMOVE_TWEET = 'tweets/REMOVE_TWEET',
   SET_ADD_FORM_STATE = 'tweets/SET_ADD_FORM_STATE',
 }
 
@@ -25,6 +26,10 @@ export type AddTweetActionType = {
   type: TweetsActionsType.ADD_TWEET
   payload: TweetType
 }
+export type RemoveTweetActionType = {
+  type: TweetsActionsType.REMOVE_TWEET
+  payload: string
+}
 export type SetTweetsLoadingStateActionType = {
   type: TweetsActionsType.SET_TWEETS_LOADING_STATE
   payload: LoadingState,
@@ -40,3 +45,4 @@ export type TweetsActions =
   | AddTweetActionType
   | SetTweetsLoadingStateActionType
   | SetAddFormStateActionType
+  | RemoveTweetActionType

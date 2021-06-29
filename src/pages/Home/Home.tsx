@@ -36,6 +36,7 @@ export const Home: React.FC = () => {
     dispatch(fetchTags());
   }, [dispatch]);
 
+  // @ts-ignore
   return (
     <Container className={classes.wrapper} maxWidth={'lg'}>
       <Grid container spacing={3}>
@@ -75,6 +76,7 @@ export const Home: React.FC = () => {
                   text={tweet.text}
                   user={tweet.user}
                   createdAt={tweet.createdAt}
+                  images={tweet.images ? [...tweet.images] : []}
                 />
               )}
             </Route>

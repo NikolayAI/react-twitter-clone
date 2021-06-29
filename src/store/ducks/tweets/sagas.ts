@@ -2,13 +2,13 @@ import { call, put, takeLatest } from 'redux-saga/effects';
 import { tweetsApi } from '../../../services/api/tweetsApi';
 import { AddFormState } from './contracts/state';
 import {
-  addTweet,
+  addTweet, removeTweet,
   setAddFormState,
   setTweets,
   setTweetsLoadingState
 } from './actionCreators';
 import {
-  FetchAddTweetActionType,
+  FetchAddTweetActionType, RemoveTweetActionType,
   TweetsActionsType
 } from './contracts/actionTypes';
 import { LoadingState } from '../../types';
@@ -31,7 +31,17 @@ function* fetchTweetRequest({ payload }: FetchAddTweetActionType) {
   }
 }
 
+function* removeTweetRequest({ payload }: RemoveTweetActionType) {
+  try {
+    yield call(tweetsApi.removeTweet, payload);
+    yield put(removeTweet(payload));
+  } catch (error) {
+    alert('Ошибка при удалении твита ');
+  }
+}
+
 export function* tweetsSaga() {
   yield takeLatest(TweetsActionsType.FETCH_TWEETS, fetchTweetsRequest);
   yield takeLatest(TweetsActionsType.FETCH_ADD_TWEET, fetchTweetRequest);
+  yield takeLatest(TweetsActionsType.REMOVE_TWEET, removeTweetRequest);
 }

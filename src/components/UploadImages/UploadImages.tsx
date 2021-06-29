@@ -1,8 +1,6 @@
 import React, { useCallback, useEffect, useRef } from 'react';
-import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import IconButton from '@material-ui/core/IconButton';
 import ImageOutlinedIcon from '@material-ui/icons/CropOriginalOutlined';
-import { useHomeStyles } from '../../pages/Home/homeTheme';
 import { IImageObj } from '../AddTweetForm/AddTweetForm';
 import { ImageList } from '../ImageList/ImageList';
 

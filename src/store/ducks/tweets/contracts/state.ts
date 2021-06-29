@@ -1,4 +1,5 @@
 import { LoadingState } from '../../../types';
+import { IImageObj } from '../../../../components/AddTweetForm/AddTweetForm';
 
 export enum AddFormState {
   LOADING = 'LOADING',
@@ -10,6 +11,7 @@ export type TweetType = {
   _id: string
   text: string
   createdAt: string
+  images?: string[]
   user: {
     fullName: string,
     userName: string,

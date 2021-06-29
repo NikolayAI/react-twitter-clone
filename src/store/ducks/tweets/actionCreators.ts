@@ -6,7 +6,7 @@ import {
 import {
   AddTweetActionType,
   FetchAddTweetActionType,
-  fetchTweetsActionType,
+  fetchTweetsActionType, RemoveTweetActionType,
   SetAddFormStateActionType,
   SetTweetsActionType,
   SetTweetsLoadingStateActionType,
@@ -30,6 +30,11 @@ export const fetchAddTweet = (payload: {text: string, images: string[]}): FetchA
 
 export const addTweet = (payload: TweetType): AddTweetActionType => ({
   type: TweetsActionsType.ADD_TWEET,
+  payload,
+});
+
+export const removeTweet = (payload: string): RemoveTweetActionType => ({
+  type: TweetsActionsType.REMOVE_TWEET,
   payload,
 });
 
